@@ -1,0 +1,6 @@
+{plugins/
+bridge-check.js
+*.tmp
+*.log
+Thumbs.db
+.DS_Store

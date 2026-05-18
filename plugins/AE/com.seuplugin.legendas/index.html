@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vini Captions</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body data-host="AE">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">L</div>
+      <div>
+        <div class="brand-title">Vini Captions</div>
+        <div class="brand-subtitle" id="host-label">After Effects</div>
+      </div>
+    </div>
+    <div class="status-dot" id="status-dot"></div>
+  </header>
+
+  <main class="workspace">
+    <section class="panel-strip">
+      <button class="tab active" data-tab="create">Criar</button>
+      <button class="tab" data-tab="srt">SRT</button>
+      <button class="tab" data-tab="style">Estilo</button>
+      <button class="tab" data-tab="license">Conta</button>
+      <button class="tab" data-tab="log">Log</button>
+    </section>
+
+    <section class="host-line">
+      <span id="host-info">Conectando...</span>
+      <button class="icon-btn" id="btn-refresh" title="Atualizar host">R</button>
+    </section>
+
+    <section class="tab-page active" id="page-create">
+      <label class="field-label" for="caption-text">Texto</label>
+      <textarea id="caption-text" rows="4" placeholder="Digite a legenda"></textarea>
+      <div class="two-col">
+        <label class="field-label">Inicio
+          <select id="single-start">
+            <option value="cti">Tempo atual</option>
+            <option value="zero">0:00</option>
+          </select>
+        </label>
+        <label class="field-label">Duracao
+          <input type="number" id="single-duration" min="0.25" max="60" step="0.25" value="3">
+        </label>
+      </div>
+      <button class="primary-action" id="btn-create-caption">Criar</button>
+      <button class="secondary-action" id="btn-apply-selected">Aplicar preset nos selecionados</button>
+    </section>
+
+    <section class="tab-page" id="page-srt">
+      <div class="drop-zone" id="srt-summary">
+        Nenhum SRT carregado
+      </div>
+      <button class="primary-action" id="btn-import-srt">Importar SRT</button>
+      <button class="secondary-action" id="btn-preview-srt">Pre-visualizar SRT</button>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Entrada</th><th>Texto</th></tr>
+          </thead>
+          <tbody id="srt-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="tab-page" id="page-style">
+      <canvas id="preview-canvas" width="640" height="360"></canvas>
+      <label class="field-label" for="preset-select">Preset</label>
+      <select id="preset-select"></select>
+      <div class="two-col">
+        <label class="field-label">Fonte
+          <input type="number" id="font-size" min="12" max="220" value="54">
+        </label>
+        <label class="field-label">Y %
+          <input type="number" id="position-y" min="5" max="95" value="84">
+        </label>
+      </div>
+      <div class="two-col">
+        <label class="field-label">Cor
+          <input type="color" id="fill-color" value="#ffffff">
+        </label>
+        <label class="field-label">Borda
+          <input type="color" id="stroke-color" value="#111111">
+        </label>
+      </div>
+      <div class="two-col">
+        <label class="field-label">Espessura
+          <input type="number" id="stroke-width" min="0" max="20" value="3">
+        </label>
+        <label class="field-label">Frames
+          <input type="number" id="duration-frames" min="1" max="90" value="12">
+        </label>
+      </div>
+      <label class="check-row">
+        <input type="checkbox" id="all-caps">
+        <span>Texto em caixa alta</span>
+      </label>
+      <button class="secondary-action" id="btn-save-style">Salvar estilo padrao</button>
+    </section>
+
+    <section class="tab-page" id="page-license">
+      <div class="license-state" id="license-state">Licenca nao verificada</div>
+      <label class="field-label">E-mail
+        <input type="email" id="license-email" placeholder="voce@email.com">
+      </label>
+      <label class="field-label">Chave
+        <input type="text" id="license-key" placeholder="XXXX-XXXX-XXXX">
+      </label>
+      <label class="field-label">API opcional
+        <input type="text" id="api-base" placeholder="https://sua-api.com">
+      </label>
+      <button class="primary-action" id="btn-activate-license">Ativar</button>
+      <button class="secondary-action" id="btn-dev-license">Ativar teste local</button>
+      <button class="secondary-action" id="btn-clear-license">Remover licenca</button>
+    </section>
+
+    <section class="tab-page" id="page-log">
+      <pre class="log" id="log-output"></pre>
+      <button class="secondary-action" id="btn-open-data">Abrir pasta de dados</button>
+      <button class="secondary-action" id="btn-copy-log">Copiar diagnostico</button>
+    </section>
+  </main>
+
+  <footer class="statusbar" id="statusbar">Inicializando...</footer>
+
+  <script src="CSInterface.js"></script>
+  <script src="panel.js"></script>
+</body>
+</html>

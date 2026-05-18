@@ -1,0 +1,18 @@
+Arquivo pronto para testar agora:
+- MPL_Basic_Title_Teste.mogrt
+
+Use este arquivo no plugin:
+1. No Premiere, abra o plugin.
+2. Clique em "Selecionar MOGRT animado".
+3. Escolha mogrt-teste/MPL_Basic_Title_Teste.mogrt.
+4. Use "Injetar legenda animada" ou "Injetar SRT com MOGRT".
+
+Gerador personalizado:
+1. Execute criar_mogrt_teste.bat na raiz do projeto.
+2. Aguarde o After Effects abrir e mostrar a mensagem de conclusao.
+3. Se o AE exportar o MOGRT, escolha mogrt-teste/MPL_Legenda_Teste.mogrt.
+
+Tambem foi salvo:
+- MPL_Legenda_Teste.aep
+
+Se o export automatico do AE falhar, abra esse .aep no After Effects e exporte pelo painel Essential Graphics.

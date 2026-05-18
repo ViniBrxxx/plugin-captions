@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vini Captions</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body data-host="PR">
+  <header class="app-titlebar">
+    <span>Vini Captions</span>
+    <button class="menu-btn" id="btn-refresh" title="Atualizar host">Atualizar</button>
+  </header>
+
+  <section class="productbar">
+    <div>
+      <span class="brand-title">VINI <strong>CAPTIONS</strong></span>
+      <span class="brand-subtitle" id="host-label">Premiere Pro</span>
+    </div>
+    <div class="status-dot" id="status-dot"></div>
+  </section>
+
+  <section class="file-ribbon">
+    <div id="srt-summary">Nenhum SRT carregado</div>
+    <button class="link-action" id="btn-import-srt">Carregar agora</button>
+  </section>
+
+  <main class="workspace">
+    <section class="panel-strip">
+      <button class="tab active" data-tab="create">Templates</button>
+      <button class="tab" data-tab="srt">SRT</button>
+    </section>
+
+    <section class="host-line">
+      <span id="host-info">Conectando...</span>
+    </section>
+
+    <section class="tab-page active" id="page-create">
+      <div class="search-row">
+        <span class="search-icon"></span>
+        <input type="search" id="template-search" placeholder="Buscar templates...">
+      </div>
+
+      <div class="template-layout">
+        <aside class="template-sidebar" id="template-sidebar">
+          <div class="side-title">Categorias</div>
+          <button class="side-link active" data-filter="all">Geral</button>
+          <div class="side-title">Palavras</div>
+          <button class="side-link" data-filter="words:1">1 Palavra (0)</button>
+          <button class="side-link" data-filter="words:2">2 Palavras (0)</button>
+          <button class="side-link" data-filter="words:3">3 Palavras (1)</button>
+          <button class="side-link" data-filter="words:4">4 Palavras (0)</button>
+        </aside>
+        <div class="resize-handle resize-handle-x" id="category-resizer" title="Arraste para ajustar categorias"></div>
+
+        <section class="template-main">
+          <div class="template-stage">
+            <canvas id="preview-canvas" width="1080" height="1920"></canvas>
+            <img class="template-media-preview" id="template-image-preview" alt="" src="">
+            <video class="template-media-preview" id="template-video-preview" muted loop playsinline preload="auto"></video>
+            <span class="preview-hint">Arraste para posicionar</span>
+          </div>
+
+          <div class="template-grid">
+            <button class="template-card active" data-words="1" data-mogrt="assets/templates/1-palavra/animacao-1.mogrt" data-preview="assets/previews/animacao-1.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-1.gif" alt=""></span>
+              <span>Animacao 1</span>
+            </button>
+            <button class="template-card" data-words="3" data-mogrt="assets/templates/3-palavras/animacao-2.mogrt" data-preview="assets/previews/animacao-2.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-2.gif" alt=""></span>
+              <span>Animacao 2</span>
+            </button>
+            <button class="template-card" data-words="3" data-mogrt="assets/templates/3-palavras/animacao-3.mogrt" data-preview="assets/previews/animacao-3.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-3.gif" alt=""></span>
+              <span>Animacao 3</span>
+            </button>
+            <button class="template-card" data-words="1" data-mogrt="assets/templates/1-palavra/animacao-4.mogrt" data-preview="assets/previews/animacao-4.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-4.gif" alt=""></span>
+              <span>Animacao 4</span>
+            </button>
+            <button class="template-card" data-words="1" data-mogrt="assets/templates/1-palavra/animacao-5.mogrt" data-preview="assets/previews/animacao-5.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-5.gif" alt=""></span>
+              <span>Animacao 5</span>
+            </button>
+            <button class="template-card" data-words="1" data-mogrt="assets/templates/1-palavra/animacao-6.mogrt" data-preview="assets/previews/animacao-6.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-6.gif" alt=""></span>
+              <span>Animacao 6</span>
+            </button>
+            <button class="template-card" data-words="2" data-mogrt="assets/templates/2-palavras/animacao-7.mogrt" data-preview="assets/previews/animacao-7.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-7.gif" alt=""></span>
+              <span>Animacao 7</span>
+            </button>
+            <button class="template-card" data-words="3" data-mogrt="assets/templates/3-palavras/animacao-9.mogrt" data-preview="assets/previews/animacao-9.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-9.gif" alt=""></span>
+              <span>Animacao 9</span>
+            </button>
+            <button class="template-card" data-words="3" data-mogrt="assets/templates/3-palavras/animacao-10.mogrt" data-preview="assets/previews/animacao-10.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-10.gif" alt=""></span>
+              <span>Animacao 10</span>
+            </button>
+            <button class="template-card" data-words="4" data-mogrt="assets/templates/4-palavras/animacao-11.mogrt" data-preview="assets/previews/animacao-11.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-11.gif" alt=""></span>
+              <span>Animacao 11</span>
+            </button>
+            <button class="template-card" data-words="3" data-mogrt="assets/templates/3-palavras/animacao-12.mogrt" data-preview="assets/previews/animacao-12.gif">
+              <span class="thumb gif-thumb"><img src="assets/previews/animacao-12.gif" alt=""></span>
+              <span>Animacao 12</span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <div class="resize-handle resize-handle-y" id="apply-resizer" title="Arraste para ajustar as secoes"></div>
+
+      <section class="apply-panel">
+        <div class="apply-options">
+          <span>Apos aplicar:</span>
+          <label><input type="radio" name="after-apply" checked> Manter originais</label>
+          <label><input type="radio" name="after-apply"> Desativar originais</label>
+        </div>
+
+        <button class="primary-action premiere-only" id="btn-inject-caption">Aplicar</button>
+        <button class="secondary-action ae-only" id="btn-apply-selected">Aplicar preset nos selecionados</button>
+      </section>
+    </section>
+
+    <section class="tab-page" id="page-srt">
+      <div class="srt-position-wrap">
+        <div class="srt-position-stage">
+          <canvas class="position-canvas" id="srt-position-canvas" width="1080" height="1920"></canvas>
+          <span class="preview-hint">Posicione sua legenda aqui</span>
+        </div>
+      </div>
+      <button class="primary-action premiere-only" id="btn-auto-srt">Automacao SRT</button>
+      <button class="primary-action premiere-only" id="btn-inject-srt-mogrt">Aplicar SRT</button>
+      <button class="secondary-action" id="btn-preview-srt">Pre-visualizar SRT</button>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Entrada</th><th>Texto</th></tr>
+          </thead>
+          <tbody id="srt-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="hidden-controls" aria-hidden="true">
+      <select id="preset-select"></select>
+      <input type="number" id="font-size" min="12" max="220" value="54">
+      <input type="number" id="position-y" min="5" max="95" value="84">
+      <input type="color" id="fill-color" value="#ffffff">
+      <input type="color" id="stroke-color" value="#111111">
+      <input type="number" id="stroke-width" min="0" max="20" value="3">
+      <input type="number" id="duration-frames" min="1" max="90" value="12">
+      <input type="checkbox" id="all-caps">
+      <button id="btn-save-style" type="button"></button>
+      <div class="license-state" id="license-state">Licenca nao verificada</div>
+      <input type="email" id="license-email" value="vini@local">
+      <input type="text" id="license-key" value="LOCAL-DEV">
+      <input type="text" id="api-base">
+      <button id="btn-activate-license" type="button"></button>
+      <button id="btn-dev-license" type="button"></button>
+      <button id="btn-clear-license" type="button"></button>
+    </div>
+  </main>
+
+  <section class="log-drawer" id="log-drawer">
+    <div class="log-actions">
+      <button class="link-action" id="btn-open-data">Abrir pasta</button>
+      <button class="link-action" id="btn-copy-log">Copiar log</button>
+    </div>
+    <pre class="log" id="log-output"></pre>
+  </section>
+
+  <footer class="statusbar" id="statusbar">
+    <span id="status-message">Inicializando...</span>
+    <button class="log-toggle" id="btn-toggle-log" title="Consultar logs" aria-expanded="false">▴</button>
+  </footer>
+
+  <script src="CSInterface.js"></script>
+  <script src="panel.js"></script>
+</body>
+</html>

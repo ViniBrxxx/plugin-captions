@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "product": "Vini Captions",
+  "dataFolder": "ViniCaptions",
+  "license": {
+    "apiBaseUrl": "",
+    "offlineDevDays": 14
+  },
+  "presets": [
+    {
+      "id": "fade",
+      "name": "Fade",
+      "description": "Opacity in and out.",
+      "durationFrames": 10
+    },
+    {
+      "id": "slide-up",
+      "name": "Slide Up",
+      "description": "Subtitle rises into place.",
+      "durationFrames": 12
+    },
+    {
+      "id": "scale-pop",
+      "name": "Scale Pop",
+      "description": "Quick scale emphasis.",
+      "durationFrames": 10
+    },
+    {
+      "id": "typewriter",
+      "name": "Typewriter",
+      "description": "Progressive reveal preview, fade fallback in host.",
+      "durationFrames": 16
+    },
+    {
+      "id": "bounce",
+      "name": "Bounce",
+      "description": "Soft overshoot on entrance.",
+      "durationFrames": 14
+    }
+  ],
+  "styleDefaults": {
+    "fontFamily": "Arial-BoldMT",
+    "fontSize": 54,
+    "fillColor": "#ffffff",
+    "strokeColor": "#111111",
+    "strokeWidth": 3,
+    "positionY": 84,
+    "allCaps": false,
+    "presetId": "slide-up",
+    "durationFrames": 12,
+    "videoTrack": 1
+  }
+}
