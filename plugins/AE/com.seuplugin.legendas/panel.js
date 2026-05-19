@@ -12,6 +12,15 @@
   var cs = null;
   var logLines = [];
   var previewStart = Date.now();
+  var FREE_LICENSE_SESSION = {
+    email: "uso-livre@vini-captions",
+    key: "FREE-ACCESS",
+    source: "free",
+    host: HOST,
+    plan: "free",
+    expiresAt: "",
+    activatedAt: "always"
+  };
 
   var defaults = {
     fontFamily: "Arial-BoldMT",
@@ -27,8 +36,8 @@
   };
 
   var state = {
-    licensed: false,
-    session: null,
+    licensed: true,
+    session: FREE_LICENSE_SESSION,
     hostReady: false,
     presets: [],
     lastSrtPath: "",
@@ -303,24 +312,17 @@
   }
 
   function sessionValid(session) {
-    if (!session || !session.email) return false;
-    if (!session.expiresAt) return true;
-    return new Date(session.expiresAt).getTime() > Date.now();
+    return true;
   }
 
   function setLicensed(session) {
-    state.session = session || null;
-    state.licensed = sessionValid(session);
-    if (state.licensed) {
-      ui.licenseState.textContent = "Licenca ativa: " + session.email;
-      ui.licenseState.className = "license-state ok";
-      if (session.email) ui.licenseEmail.value = session.email;
-      setLocked(false);
-    } else {
-      ui.licenseState.textContent = session && session.expiresAt ? "Licenca expirada" : "Licenca nao verificada";
-      ui.licenseState.className = "license-state err";
-      setLocked(true);
-    }
+    state.session = merge(FREE_LICENSE_SESSION, session || {});
+    state.licensed = sessionValid(state.session);
+    ui.licenseState.textContent = "Licenca liberada para todos";
+    ui.licenseState.className = "license-state ok";
+    if (ui.licenseEmail) ui.licenseEmail.value = state.session.email || FREE_LICENSE_SESSION.email;
+    if (ui.licenseKey) ui.licenseKey.value = state.session.key || FREE_LICENSE_SESSION.key;
+    setLocked(false);
   }
 
   function loadSession() {
@@ -329,14 +331,14 @@
         try {
           var session = JSON.parse(res.content);
           setLicensed(session);
-          if (state.licensed) setStatus("Sessao restaurada.", "ok");
-          else setStatus("Ative a licenca para liberar o painel.", "err");
+          setStatus("Uso liberado para todos.", "ok");
         } catch (e) {
           setLicensed(null);
+          setStatus("Uso liberado para todos.", "ok");
         }
       } else {
         setLicensed(null);
-        setStatus("Ative a licenca para liberar o painel.", "err");
+        setStatus("Uso liberado para todos.", "ok");
       }
     });
   }
@@ -354,81 +356,30 @@
   }
 
   function activateLocal(email, key, source) {
-    var expires = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
-    saveSession({
+    saveSession(merge(FREE_LICENSE_SESSION, {
       email: email || "teste@local",
-      key: key || "LOCAL-DEV",
-      source: source || "local",
+      key: key || FREE_LICENSE_SESSION.key,
+      source: source || "free",
       host: HOST,
-      plan: "local-test",
-      expiresAt: expires.toISOString(),
+      plan: "free",
+      expiresAt: "",
       activatedAt: new Date().toISOString()
-    }, function (ok) {
-      if (ok) setStatus("Licenca local ativa por 14 dias.", "ok");
+    }), function (ok) {
+      if (ok) setStatus("Licenca liberada para uso gratuito.", "ok");
     });
   }
 
   function activateLicense() {
-    var email = (ui.licenseEmail.value || "").trim();
-    var key = (ui.licenseKey.value || "").trim();
-    var apiBase = (ui.apiBase.value || "").replace(/\/+$/, "");
-    if (!email || !key) {
-      setStatus("Preencha e-mail e chave.", "err");
-      return;
-    }
-    if (apiBase) localStorage.setItem(API_KEY, apiBase);
-
-    ui.btnActivateLicense.disabled = true;
-    setDot("busy");
-    setStatus("Validando licenca...");
-    callHost("EP_getMachineId", [], function (machine) {
-      var machineId = machine && machine.machineId ? machine.machineId : "UNKNOWN";
-      if (!apiBase) {
-        if (key.length < 8) {
-          ui.btnActivateLicense.disabled = false;
-          setDot(state.hostReady ? "ok" : "err");
-          setStatus("Chave muito curta.", "err");
-          return;
-        }
-        ui.btnActivateLicense.disabled = false;
-        setDot("ok");
-        activateLocal(email, key, "manual-local");
-        return;
-      }
-      postJson(apiBase + "/validate-key", {
-        email: email,
-        key: key,
-        machineId: machineId,
-        plugin: HOST
-      }, function (data) {
-        ui.btnActivateLicense.disabled = false;
-        if (data && (data.ok || data.valid)) {
-          saveSession({
-            email: email,
-            key: key,
-            token: data.token || "",
-            plan: data.plan || "active",
-            host: HOST,
-            machineId: machineId,
-            source: "api",
-            expiresAt: data.expiresAt || data.validUntil || "",
-            activatedAt: new Date().toISOString()
-          }, function (ok) {
-            setDot(ok ? "ok" : "err");
-            if (ok) setStatus("Licenca validada.", "ok");
-          });
-        } else {
-          setDot("err");
-          setStatus((data && data.error) || "Licenca invalida.", "err");
-        }
-      });
-    });
+    var email = ui.licenseEmail ? (ui.licenseEmail.value || "").trim() : "";
+    var key = ui.licenseKey ? (ui.licenseKey.value || "").trim() : "";
+    setDot("ok");
+    activateLocal(email || FREE_LICENSE_SESSION.email, key || FREE_LICENSE_SESSION.key, "free");
   }
 
   function clearLicense() {
     callHost("EP_saveLocalData", [LICENSE_FILE, "{}"], function () {
       setLicensed(null);
-      setStatus("Licenca removida.", "info");
+      setStatus("Licenca continua liberada para todos.", "ok");
     });
   }
 
@@ -678,7 +629,7 @@
         setDot("err");
         setStatus(ui.hostInfo.textContent, "err");
       }
-      setLocked(!state.licensed);
+      setLocked(false);
     });
   }
 
@@ -825,7 +776,8 @@
 
   function boot() {
     ui.hostLabel.textContent = HOST_NAME + " | v" + VERSION;
-    ui.apiBase.value = localStorage.getItem(API_KEY) || "";
+    localStorage.removeItem(API_KEY);
+    ui.apiBase.value = "";
     setMogrtPath(savedMogrtPath());
     bindTabs();
     bindEvents();

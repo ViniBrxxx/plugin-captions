@@ -38,7 +38,7 @@ meu-plugin-legendas/
 - Parser SRT compartilhado nas bridges.
 - Preview visual dos presets no painel.
 - Presets: Fade, Slide Up, Scale Pop, Typewriter e Bounce.
-- Licenca local/API: se a API estiver vazia, o painel permite ativacao local de teste por 14 dias.
+- Licenca liberada: o painel abre em modo gratuito, sem chave, API ou prazo de expiracao.
 - Dados locais em `ViniCaptions` no AppData/Application Support.
 - Instalador Windows e macOS instalando AE e Premiere com IDs separados.
 
@@ -86,22 +86,7 @@ Depois de instalar, feche e abra novamente o aplicativo Adobe.
 
 ## Licenciamento
 
-O painel aceita duas formas:
-
-- API: preencha `API opcional` com a base do backend. O painel chama `POST /validate-key`.
-- Local: deixe API vazia e use uma chave com pelo menos 8 caracteres, ou clique em `Ativar teste local`.
-
-Resposta esperada da API:
-
-```json
-{ "ok": true, "token": "...", "plan": "monthly", "expiresAt": "2026-12-31T23:59:59.000Z" }
-```
-
-Erro:
-
-```json
-{ "ok": false, "error": "Chave invalida ou expirada." }
-```
+O plugin esta liberado para uso gratuito. O painel marca a licenca como ativa automaticamente e nao exige chave, API, internet ou sessao salva.
 
 ## Desenvolvimento
 

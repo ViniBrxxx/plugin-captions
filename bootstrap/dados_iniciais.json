@@ -4,7 +4,8 @@
   "dataFolder": "ViniCaptions",
   "license": {
     "apiBaseUrl": "",
-    "offlineDevDays": 14
+    "mode": "free",
+    "requiresActivation": false
   },
   "presets": [
     {

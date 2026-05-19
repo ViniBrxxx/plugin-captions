@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Entregar um plugin de legendas instalavel para Adobe After Effects e Adobe Premiere Pro, usando CEP, com UI unica, parser SRT, presets visuais, persistencia local, licenciamento basico e instaladores.
+Entregar um plugin de legendas instalavel para Adobe After Effects e Adobe Premiere Pro, usando CEP, com UI unica, parser SRT, presets visuais, persistencia local, uso livre sem bloqueio por licenca e instaladores.
 
 ## Ordem de implementacao
 
@@ -28,7 +28,7 @@ Entregar um plugin de legendas instalavel para Adobe After Effects e Adobe Premi
 
 5. Polish e distribuicao
    - Salvar estilo e sessao local.
-   - Implementar licenca local/API.
+   - Liberar o uso sem chave, API ou expiracao.
    - Atualizar instaladores Windows/macOS.
    - Documentar uso e limitacoes tecnicas.
 
